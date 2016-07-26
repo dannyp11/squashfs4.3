@@ -127,6 +127,8 @@ Filesystem build options:
 -keep-as-directory	if one source directory is specified, create a root
 			directory containing that directory, rather than the
 			contents of the directory
+-no-date		do not put make date in the squash file (-no-append is also activated)
+			this way, the squash always has the same cksum
 
 Filesystem filter options:
 -p <pseudo-definition>	Add pseudo file definition
