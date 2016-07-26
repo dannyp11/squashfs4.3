@@ -5321,7 +5321,7 @@ printOptions:
 			ERROR("\t\t\tdirectory containing that directory, "
 				"rather than the\n");
 			ERROR("\t\t\tcontents of the directory\n");
-			ERROR("-no-date\t\tdo not put make date in the squash file (-no-append is also activated)\n");
+			ERROR("-no-date\t\tdo not store the date in the squash file (-no-append is also activated)\n");
 			ERROR("\t\t\tthis way, the squash always has the same cksum\n");
 			ERROR("\nFilesystem filter options:\n");
 			ERROR("-p <pseudo-definition>\tAdd pseudo file "
