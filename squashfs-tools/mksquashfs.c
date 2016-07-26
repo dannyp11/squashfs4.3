@@ -5206,8 +5206,10 @@ int main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-keep-as-directory") == 0)
 			keep_as_directory = TRUE;
 
-		else if (strcmp(argv[i], "-no-date") == 0)
+		else if (strcmp(argv[i], "-no-date") == 0) {
 			no_date = TRUE;
+			delete = TRUE;
+		}
 
 		else if (strcmp(argv[i], "-exit-on-error") == 0)
 			exit_on_error = TRUE;
