@@ -98,6 +98,7 @@ int old_exclude = TRUE;
 int use_regex = FALSE;
 int nopad = FALSE;
 int exit_on_error = FALSE;
+int no_date = FALSE;
 
 long long global_uid = -1, global_gid = -1;
 
@@ -3139,7 +3140,7 @@ void dir_scan(squashfs_inode *inode, char *pathname,
 		buf.st_mode = S_IRWXU | S_IRWXG | S_IRWXO | S_IFDIR;
 		buf.st_uid = getuid();
 		buf.st_gid = getgid();
-		buf.st_mtime = time(NULL);
+		buf.st_mtime = (!no_date) ? time(NULL) : 0;
 		buf.st_dev = 0;
 		buf.st_ino = 0;
 		dir_ent->inode = lookup_inode2(&buf, PSEUDO_FILE_OTHER, 0);
@@ -3526,7 +3527,7 @@ void dir_scan2(struct dir_info *dir, struct pseudo *pseudo)
 		buf.st_gid = pseudo_ent->dev->gid;
 		buf.st_rdev = makedev(pseudo_ent->dev->major,
 			pseudo_ent->dev->minor);
-		buf.st_mtime = time(NULL);
+		buf.st_mtime = (!no_date) ? time(NULL) : 0;
 		buf.st_ino = pseudo_ino ++;
 
 		if(pseudo_ent->dev->type == 'd') {
@@ -5262,6 +5263,11 @@ print_compressor_options:
 		else if(strcmp(argv[i], "-keep-as-directory") == 0)
 			keep_as_directory = TRUE;
 
+		else if (strcmp(argv[i], "-no-date") == 0) {
+			no_date = TRUE;
+			delete = TRUE;
+		}
+
 		else if(strcmp(argv[i], "-exit-on-error") == 0)
 			exit_on_error = TRUE;
 
@@ -5315,6 +5321,8 @@ printOptions:
 			ERROR("\t\t\tdirectory containing that directory, "
 				"rather than the\n");
 			ERROR("\t\t\tcontents of the directory\n");
+			ERROR("-no-date\t\tdo not put make date in the squash file (-no-append is also activated)\n");
+			ERROR("\t\t\tthis way, the squash always has the same cksum\n");
 			ERROR("\nFilesystem filter options:\n");
 			ERROR("-p <pseudo-definition>\tAdd pseudo file "
 				"definition\n");
@@ -5717,7 +5725,7 @@ printOptions:
 	sBlk.flags = SQUASHFS_MKFLAGS(noI, noD, noF, noX, no_fragments,
 		always_use_fragments, duplicate_checking, exportable,
 		no_xattrs, comp_opts);
-	sBlk.mkfs_time = time(NULL);
+	sBlk.mkfs_time = (!no_date) ? time(NULL) : 0;
 
 	disable_info();
 
