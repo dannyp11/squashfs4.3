@@ -98,6 +98,7 @@ int old_exclude = TRUE;
 int use_regex = FALSE;
 int nopad = FALSE;
 int exit_on_error = FALSE;
+int no_date = FALSE;
 
 long long global_uid = -1, global_gid = -1;
 
@@ -5262,6 +5263,9 @@ print_compressor_options:
 		else if(strcmp(argv[i], "-keep-as-directory") == 0)
 			keep_as_directory = TRUE;
 
+		else if(strcmp(argv[i], "-no-date") == 0)
+					no_date = TRUE;
+
 		else if(strcmp(argv[i], "-exit-on-error") == 0)
 			exit_on_error = TRUE;
 
@@ -5315,6 +5319,8 @@ printOptions:
 			ERROR("\t\t\tdirectory containing that directory, "
 				"rather than the\n");
 			ERROR("\t\t\tcontents of the directory\n");
+			ERROR("-no-date\t\tdo not put make date in the squash file\n");
+			ERROR("\t\t\tthis way, the squash always has the same cksum\n");
 			ERROR("\nFilesystem filter options:\n");
 			ERROR("-p <pseudo-definition>\tAdd pseudo file "
 				"definition\n");
