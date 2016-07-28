@@ -3140,7 +3140,7 @@ void dir_scan(squashfs_inode *inode, char *pathname,
 		buf.st_mode = S_IRWXU | S_IRWXG | S_IRWXO | S_IFDIR;
 		buf.st_uid = getuid();
 		buf.st_gid = getgid();
-		buf.st_mtime = (!no_date) ? time(NULL) : 0;
+		buf.st_mtime = time(NULL);
 		buf.st_dev = 0;
 		buf.st_ino = 0;
 		dir_ent->inode = lookup_inode2(&buf, PSEUDO_FILE_OTHER, 0);
