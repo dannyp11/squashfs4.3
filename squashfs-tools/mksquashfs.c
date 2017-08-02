@@ -3140,7 +3140,7 @@ void dir_scan(squashfs_inode *inode, char *pathname,
 		buf.st_mode = S_IRWXU | S_IRWXG | S_IRWXO | S_IFDIR;
 		buf.st_uid = getuid();
 		buf.st_gid = getgid();
-		buf.st_mtime = time(NULL);
+		buf.st_mtime = (!no_date)? time(NULL) : 0;
 		buf.st_dev = 0;
 		buf.st_ino = 0;
 		dir_ent->inode = lookup_inode2(&buf, PSEUDO_FILE_OTHER, 0);
@@ -3527,7 +3527,7 @@ void dir_scan2(struct dir_info *dir, struct pseudo *pseudo)
 		buf.st_gid = pseudo_ent->dev->gid;
 		buf.st_rdev = makedev(pseudo_ent->dev->major,
 			pseudo_ent->dev->minor);
-		buf.st_mtime = time(NULL);
+		buf.st_mtime = (!no_date)? time(NULL) : 0;
 		buf.st_ino = pseudo_ino ++;
 
 		if(pseudo_ent->dev->type == 'd') {
@@ -5323,7 +5323,7 @@ printOptions:
 				"rather than the\n");
 			ERROR("\t\t\tcontents of the directory\n");
 			ERROR("-no-date\t\tdo not store the date in the squash file\n");
-			ERROR("\t\t\t(-no-append and -no-fragment is also activated)\n");
+			ERROR("\t\t\t(-noappend and -no-fragments is also activated)\n");
 			ERROR("\t\t\tthis way, the squash always has the same cksum\n");
 			ERROR("\nFilesystem filter options:\n");
 			ERROR("-p <pseudo-definition>\tAdd pseudo file "

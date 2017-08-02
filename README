@@ -3,6 +3,7 @@
 	Copyright 2002-2014 Phillip Lougher <phillip@lougher.demon.co.uk>
 
 	Released under the GPL licence (version 2 or later).
+[![Build Status](https://travis-ci.org/dannyp11/squashfs4.3.svg?branch=master)](https://travis-ci.org/dannyp11/squashfs4.3)
 
 Welcome to Squashfs version 4.3.  Please read the README-4.3 and CHANGES files
 for details of changes.
@@ -128,7 +129,7 @@ Filesystem build options:
 			directory containing that directory, rather than the
 			contents of the directory
 -no-date		do not store the date in the squash file
-			(-no-append and -no-fragment is also activated)
+			(-noappend and -no-fragments is also activated)
 			this way, the squash always has the same cksum
 
 Filesystem filter options:
